@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_12"
+    android:orientation="horizontal"
+    android:id="@+id/chat_item_box">
+
+    <ImageView
+        android:id="@+id/chat_item_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_marginStart="@dimen/dimen_12"
+        android:layout_marginEnd="@dimen/dimen_8"
+        android:background="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/app_name" />
+    <TextView
+        android:id="@+id/chat_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/dimen_230"
+        android:layout_marginEnd="@dimen/dimen_96"
+        android:paddingVertical="@dimen/dimen_8"
+        android:paddingHorizontal="@dimen/dimen_12"
+
+        android:textColor="@color/title"
+        android:textSize="@dimen/size_14"
+        android:background="@drawable/bg_msg"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/chat_item_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/dimen_230"
+        android:layout_marginStart="@dimen/dimen_96"
+        android:paddingVertical="@dimen/dimen_8"
+        android:paddingHorizontal="@dimen/dimen_12"
+        android:visibility="gone"
+
+        android:textColor="@color/title"
+        android:textSize="@dimen/size_14"
+        android:background="@drawable/bg_msg2"/>
+    <ImageView
+        android:id="@+id/chat_item_icon2"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:layout_marginEnd="@dimen/dimen_12"
+        android:layout_marginStart="@dimen/dimen_8"
+        android:background="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/app_name"
+        android:visibility="gone"/>
+
+</LinearLayout>

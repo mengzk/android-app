@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalProgress">
+        <attr name="bgColor" format="color"/> <!--背景-->
+        <attr name="fgColor" format="color"/><!--前景景-->
+        <attr name="mgColor" format="color"/><!--左右圆角蒙层色-->
+        <attr name="txColor" format="color"/><!--进度字体颜色-->
+        <attr name="txSize" format="dimension"/><!--进度字体大小-->
+        <attr name="progress" format="float"/><!--进度-->
+    </declare-styleable>
+
+    <declare-styleable name="CustomEditText">
+        <attr name="leftImage" format="reference"/>
+        <attr name="rightImage" format="reference"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="isPwd" format="boolean"/>
+        <attr name="hint" format="string"/>
+        <attr name="hintColor" format="color"/>
+        <attr name="textInputType" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="number" value="1"/>
+            <enum name="decimal" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MoneyTextView">
+        <attr name="prefix" format="string|reference"/>
+        <attr name="prefixTextSize" format="dimension"/>
+        <attr name="prefixTextColor2" format="color"/>
+        <attr name="sign" format="string"/>
+        <attr name="signTextSize" format="dimension"/>
+        <attr name="signTextColor" format="color"/>
+        <attr name="symbol" format="string"/>
+        <attr name="symbolTextSize" format="dimension"/>
+        <attr name="symbolTextColor" format="color"/>
+        <attr name="amount" format="float"/>
+        <attr name="amountTextSize" format="dimension"/>
+        <attr name="amountTextColor" format="color"/>
+        <attr name="size" format="dimension"/>
+        <attr name="color" format="color"/>
+        <attr name="fractionDigits" format="integer"/>
+        <attr name="trvDirection">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="right" value="2" />
+            <enum name="left" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="HeaderBar">
+        <attr name="back" format="boolean" />
+        <attr name="title" format="string|reference" />
+        <attr name="rightText" format="string|reference" />
+        <attr name="rightIocn" format="reference" />
+    </declare-styleable>
+</resources>
