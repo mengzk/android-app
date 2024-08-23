@@ -11,8 +11,8 @@ import retrofit2.Response;
  * Date: 2023/04/26
  * Desc:
  */
-public abstract class RequestCallback<T> implements Callback<T> {
-    private String TAG = "BackResult";
+public abstract class ReCallback<T> implements Callback<T> {
+    private String TAG = "NetCallback";
 
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
@@ -23,7 +23,7 @@ public abstract class RequestCallback<T> implements Callback<T> {
                 onFail(response.code(), response.message());
             }
         } catch (Exception e) {
-            Log.i(TAG, String.format("RequestCallback -----> %s", e.getMessage()));
+            Log.i(TAG, String.format("onResponse -----> %s", e.getMessage()));
             onFail(response.code(), response.message());
         }
     }

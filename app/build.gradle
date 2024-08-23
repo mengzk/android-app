@@ -12,14 +12,35 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0.1"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("app.keystore")
+            storePassword "aks135246"
+            keyAlias "aks135246"
+            keyPassword "aks135246"
+        }
         release {
+            storeFile rootProject.file("app.keystore")
+            storePassword "aks135246"
+            keyAlias "aks135246"
+            keyPassword "aks135246"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.release
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {

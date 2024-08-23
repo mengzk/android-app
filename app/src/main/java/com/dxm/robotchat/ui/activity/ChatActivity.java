@@ -1,5 +1,6 @@
 package com.dxm.robotchat.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +19,11 @@ import com.dxm.robotchat.modules.model.body.Model4Body;
 import com.dxm.robotchat.modules.model.body.PromptBody;
 import com.dxm.robotchat.modules.model.entity.ChatEntity;
 import com.dxm.robotchat.modules.model.entity.MessageEntity;
-import com.dxm.robotchat.modules.network.RequestCallback;
+import com.dxm.robotchat.modules.network.ReCallback;
 import com.dxm.robotchat.modules.network.RetrofitServices;
 import com.dxm.robotchat.modules.record.AudioRecorder;
+import com.dxm.robotchat.modules.record.MyRecorder;
+import com.dxm.robotchat.modules.record.MySpeechRecognizer;
 import com.dxm.robotchat.ui.adapter.ChatAdapter;
 
 import java.util.ArrayList;
@@ -30,13 +33,14 @@ import retrofit2.Call;
 
 public class ChatActivity extends AppActivity {
 
-    private AudioRecorder audioRecord;
+    private MyRecorder audioRecord;
     private ChatApi chatApi;
     private int mode;
 
     private RecyclerView recyclerView;
     private ChatAdapter adapter;
     private ArrayList<MessageEntity> chatList = new ArrayList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,11 @@ public class ChatActivity extends AppActivity {
         chatApi = RetrofitServices.getInstance().getChatApi();
         initView();
         mode = getIntent().getIntExtra("mode", 0);
+
+//        MySpeechRecognizer mySpeechRecognizer = new MySpeechRecognizer(this);
+//        mySpeechRecognizer.startListening();
+
+        audioRecord = new MyRecorder();
     }
 
     private void initView() {
@@ -69,11 +78,13 @@ public class ChatActivity extends AppActivity {
         adapter.setItemClickListener(new RecyclerAdapter.OnItemClickListener<MessageEntity>() {
             @Override
             public void onItemClick(MessageEntity data, int position) {
+                audioRecord.start();
             }
         });
         recyclerView.setAdapter(adapter);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void scrollToBottom() {
         adapter.notifyDataSetChanged();
         recyclerView.scrollToPosition(chatList.size() - 1);
@@ -82,10 +93,10 @@ public class ChatActivity extends AppActivity {
     private void chatRequest(String msg) {
         switch (mode) {
             case 0:
-                requestV3(msg);
+                requestV4(msg);
                 break;
             case 1:
-                requestV4(msg);
+                requestV3(msg);
                 break;
             default:
                 requestV4(msg);
@@ -98,7 +109,7 @@ public class ChatActivity extends AppActivity {
 
         PromptBody body = new PromptBody(new PromptBody.ListItem("user", msg));
 
-        chatApi.chatModelV3Api("1774346652367437824", body).enqueue(new RequestCallback<ChatEntity>() {
+        chatApi.chatModelV3Api("1774346652367437824", body).enqueue(new ReCallback<ChatEntity>() {
             @Override
             protected void onResult(ChatEntity data) {
                 if (data != null) {
@@ -124,8 +135,7 @@ public class ChatActivity extends AppActivity {
 
         Model4Body body = new Model4Body(new Model4Body.ListItem("user", msg));
 
-
-        chatApi.chatModelV4Api(body).enqueue(new RequestCallback<ChatEntity>() {
+        chatApi.chatModelV4Api(body).enqueue(new ReCallback<ChatEntity>() {
             @Override
             protected void onResult(ChatEntity data) {
                 if (data != null) {
@@ -152,16 +162,16 @@ public class ChatActivity extends AppActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (audioRecord != null && audioRecord.getStatus() == AudioRecorder.Status.STATUS_START) {
-            audioRecord.pauseRecord();
-        }
+//        if (audioRecord != null && audioRecord.getStatus() == AudioRecorder.Status.STATUS_START) {
+//            audioRecord.pauseRecord();
+//        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if(audioRecord != null) {
-            audioRecord.release();
+            audioRecord.stop();
         }
     }
 }

@@ -8,6 +8,6 @@ package com.dxm.robotchat.config;
 public class AppConfig {
     public static String device_id = "";
     public static AppEnv app_env = AppEnv.TEST;
-    public static String secretKey = "dV3gTIO7K6H";
-    public static String apiKey = "baaa696e5a564afe5e4e852b0";
+    public static String secretKey = "dV3gTIO7SasX8K6H";
+    public static String apiKey = "baaa696e5a564afe5e4ce49236e852b0";
 }

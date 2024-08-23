@@ -19,17 +19,17 @@ import java.util.ArrayList;
  * Date: 2024-04-05
  * Desc:
  */
-public class HomeAdapter extends RecyclerAdapter<String, HomeAdapter.HomeViewHolder> {
+public class ModelAdapter extends RecyclerAdapter<String, ModelAdapter.HomeViewHolder> {
 
 
-    public HomeAdapter(Context context, ArrayList<String> list) {
+    public ModelAdapter(Context context, ArrayList<String> list) {
         super(context, list);
     }
 
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.adapter_home, parent, false);
+        View view = inflater.inflate(R.layout.adapter_model, parent, false);
         return new HomeViewHolder(view);
     }
 
@@ -50,8 +50,8 @@ public class HomeAdapter extends RecyclerAdapter<String, HomeAdapter.HomeViewHol
         public TextView itemName;
         public HomeViewHolder(@NonNull View view) {
             super(view);
-            itemView = view.findViewById(R.id.home_item_box);
-            itemName = view.findViewById(R.id.home_item_name);
+            itemView = view.findViewById(R.id.model_item_box);
+            itemName = view.findViewById(R.id.model_item_name);
         }
     }
 }

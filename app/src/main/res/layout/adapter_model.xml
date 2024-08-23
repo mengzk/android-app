@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_16"
+    android:background="@drawable/bg_btn"
+    android:gravity="center"
+    android:id="@+id/model_item_box">
+    <TextView
+        android:id="@+id/model_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/title"
+        android:textSize="@dimen/size_16"
+        android:paddingVertical="@dimen/dimen_14"
+        android:layout_marginHorizontal="@dimen/dimen_16"/>
+</LinearLayout>

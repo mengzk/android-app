@@ -13,7 +13,7 @@ import retrofit2.http.*;
  * Date: 2022/09/13
  * Desc:
  */
-public interface AppDefApi {
+public interface AppApi {
 
     @GET("system/clients")
     Call<ResultData<ArrayList<String>>> getClients();

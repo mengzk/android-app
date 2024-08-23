@@ -72,9 +72,9 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
             }
             /** 关闭App 与下面的restartApp重启App保留一个就行 看你需求 **/
             // 如果不关闭程序,会导致程序无法启动,需要完全结束进程才能重新启动
-            // android.os.Process.killProcess(android.os.Process.myPid());
-            // System.exit(1);
-            restartApp();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+//            restartApp();
         }
     }
 
@@ -129,34 +129,44 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
             }
             printWriter.close();
 
-            String fileName = "log_" + timeStampDate() + ".txt";
-
-            // 判断sd卡可正常使用
+            String path = "";
+            // 判断存储是否正常使用
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                //文件存储位置
-                String path = Environment.getExternalStorageDirectory().getPath() + "/CrashLog/";
-                File fl = new File(path);
-                if (!fl.exists()) {
-                    fl.mkdirs();
-                }
-                FileOutputStream fos = new FileOutputStream(path + fileName);
-                try {
-                    fos.write(writer.toString().getBytes());
-                    fos.flush();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                fos.close();
+                path = Environment.getExternalStorageDirectory().getPath() + "/CrashLog";
+            } else {
+                path = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/CrashLog";
             }
+            writeFile(writer, path);
         } catch (Exception exception) {
             printWriter.close();
+        }
+    }
+
+    private void writeFile(Writer writer, String path) {
+        try {
+            File file = new File(path);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String fileName = "log_" + stampDate() + ".txt";
+            FileOutputStream fos = new FileOutputStream(new File(path, fileName));
+            try {
+                fos.write(writer.toString().getBytes());
+                fos.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            fos.close();
+            Log.i(TAG, "writeFile: " + path + fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * 时间戳转换成日期格式字符串
      */
-    public String timeStampDate() {
+    private String stampDate() {
         Date nowTime = new Date(System.currentTimeMillis());
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyyMMddHHmmdd");
         return sdFormatter.format(nowTime);
