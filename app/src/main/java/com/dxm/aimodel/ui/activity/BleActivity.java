@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.dxm.aimodel.R;
 import com.dxm.aimodel.base.AppActivity;
+import com.dxm.aimodel.service.BleLinkService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,9 +25,6 @@ public class BleActivity extends AppActivity {
     private static final String TAG = "BluActivity";
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private BluetoothAdapter bluetoothAdapter;
-    private BluetoothSocket bluetoothSocket;
-    private ConnectedThread connectedThread;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class BleActivity extends AppActivity {
     }
 
     private void initView() {
-
+//        connectToDevice(null);
     }
 
     @SuppressLint("MissingPermission")
@@ -65,7 +63,7 @@ public class BleActivity extends AppActivity {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         if (!pairedDevices.isEmpty()) {
             for (BluetoothDevice device : pairedDevices) {
-                Log.i("Bluetooth", "Paired Device: " + device.getName() + " - " + device.getAddress());
+                Log.i("BleActivity", "Paired Device: " + device.getName() + " - " + device.getAddress());
                 if(device.getName().equals("S21")) {
                     connectToDevice(device);
                 }
@@ -76,19 +74,9 @@ public class BleActivity extends AppActivity {
 
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
-        try {
-            bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-            bluetoothSocket.connect();
-            connectedThread = new ConnectedThread(bluetoothSocket);
-            connectedThread.start();
-        } catch (IOException e) {
-            Log.e(TAG, "Error connecting to device", e);
-            try {
-                bluetoothSocket.close();
-            } catch (IOException closeException) {
-                Log.e(TAG, "Could not close the client socket", closeException);
-            }
-        }
+        Intent intent = new Intent(this, BleLinkService.class);
+        intent.putExtra("device", device);
+        startService(intent);
     }
 
     // 获取拍照结果
@@ -104,86 +92,5 @@ public class BleActivity extends AppActivity {
             }
         }
     }
-
-    private interface MessageConstants {
-        int MESSAGE_READ = 0;
-    }
-
-    private class ConnectedThread extends Thread {
-        private final BluetoothSocket socket;
-        private final InputStream inStream;
-        private final OutputStream outStream;
-
-        public ConnectedThread(BluetoothSocket socket) {
-            this.socket = socket;
-            InputStream tmpIn = null;
-            OutputStream tmpOut = null;
-
-            try {
-                tmpIn = socket.getInputStream();
-                tmpOut = socket.getOutputStream();
-            } catch (IOException e) {
-                Log.e(TAG, "Error occurred when creating input/output stream", e);
-            }
-
-            inStream = tmpIn;
-            outStream = tmpOut;
-        }
-
-        public void run() {
-            byte[] buffer = new byte[1024];
-            int numBytes;
-            String msg = "Hello, I am Android";
-            while (true) {
-                try {
-                    numBytes = inStream.read(buffer);
-                    // Handle the received data
-                    Message readMsg = handler.obtainMessage(
-                            MessageConstants.MESSAGE_READ, numBytes, -1,
-                            buffer);
-                    readMsg.sendToTarget();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    msg = "time:" + System.currentTimeMillis();
-                    write(msg.getBytes());
-                } catch (IOException e) {
-                    Log.d(TAG, "Input stream was disconnected", e);
-                    break;
-                }
-            }
-        }
-
-        public void write(byte[] bytes) {
-            try {
-                outStream.write(bytes);
-            } catch (IOException e) {
-                Log.e(TAG, "Error occurred when sending data", e);
-            }
-        }
-
-        public void cancel() {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                Log.e(TAG, "Could not close the connect socket", e);
-            }
-        }
-    }
-
-    private final Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            if (msg.what == MessageConstants.MESSAGE_READ) {
-                byte[] readBuf = (byte[]) msg.obj;
-                String receivedMessage = new String(readBuf, 0, msg.arg1);
-                Log.i(TAG, "Received: " + receivedMessage);
-            }
-            return true;
-        }
-    });
-
 
 }

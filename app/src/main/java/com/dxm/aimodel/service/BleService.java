@@ -16,6 +16,8 @@ import android.os.IBinder;
 import android.text.TextUtils;
 
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * Author: Meng
@@ -23,8 +25,8 @@ import java.util.UUID;
  * Desc:
  */
 public class BleService extends Service {
-
     private final String TAG = BleService.class.getSimpleName();
+    private Executor taskThread;
     private BluetoothGatt mBluetoothGatt;
 
     // 蓝牙连接状态
@@ -37,17 +39,17 @@ public class BleService extends Service {
     private final int STATE_CONNECTED = 2;
 
     // 蓝牙已连接
-    public final static String ACTION_GATT_CONNECTED = "com.mon.qinglan.ACTION_GATT_CONNECTED";
+    public final static String ACTION_GATT_CONNECTED = "com.dxm.aimodel.ACTION_GATT_CONNECTED";
     // 蓝牙已断开
-    public final static String ACTION_GATT_DISCONNECTED = "com.mon.qinglan.ACTION_GATT_DISCONNECTED";
+    public final static String ACTION_GATT_DISCONNECTED = "com.dxm.aimodel.ACTION_GATT_DISCONNECTED";
     // 发现GATT服务
-    public final static String ACTION_GATT_SERVICES_DISCOVERED = "com.mon.qinglan.ACTION_GATT_SERVICES_DISCOVERED";
+    public final static String ACTION_GATT_SERVICES_DISCOVERED = "com.dxm.aimodel.ACTION_GATT_SERVICES_DISCOVERED";
     // 收到蓝牙数据
-    public final static String ACTION_DATA_AVAILABLE = "com.mon.qinglan.ACTION_DATA_AVAILABLE";
+    public final static String ACTION_DATA_AVAILABLE = "com.dxm.aimodel.ACTION_DATA_AVAILABLE";
     // 连接失败
-    public final static String ACTION_CONNECTING_FAIL = "com.mon.qinglan.ACTION_CONNECTING_FAIL";
+    public final static String ACTION_CONNECTING_FAIL = "com.dxm.aimodel.ACTION_CONNECTING_FAIL";
     // 蓝牙数据
-    public final static String EXTRA_DATA = "com.mon.qinglan.EXTRA_DATA";
+    public final static String EXTRA_DATA = "com.dxm.aimodel.EXTRA_DATA";
 
     // 服务标识
     private final UUID SERVICE_UUID = UUID.fromString("0000ace0-0000-1000-8000-00805f9b34fb");
@@ -69,6 +71,7 @@ public class BleService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        taskThread = Executors.newSingleThreadExecutor();
         return mBinder;
     }
 
