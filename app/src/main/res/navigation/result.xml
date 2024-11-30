@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/resultFragment">
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.dx.health.ui.fragment.ResultFragment"
+        android:label="ResultFragment">
+        <action
+            android:id="@+id/result_to_psychologyFragment"
+            app:destination="@id/psychologyFragment" />
+        <action
+            android:id="@+id/result_to_ZYIFragment"
+            app:destination="@id/ZYIFragment" />
+        <action
+            android:id="@+id/result_to_pulseFragment"
+            app:destination="@id/pulseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pulseFragment"
+        android:name="com.dx.health.ui.fragment.PulseFragment"
+        android:label="PulseFragment" />
+
+    <fragment
+        android:id="@+id/psychologyFragment"
+        android:name="com.dx.health.ui.fragment.PsychologyFragment"
+        android:label="PsychologyFragment" />
+    <fragment
+        android:id="@+id/ZYIFragment"
+        android:name="com.dx.health.ui.fragment.ZYIFragment"
+        android:label="ZYIFragment" />
+</navigation>

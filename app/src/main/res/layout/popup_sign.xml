@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alpha_90">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_pop"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_18"
+        android:paddingVertical="@dimen/dimen_16">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/sign_title"
+                android:textColor="@color/title"
+                android:textSize="@dimen/size_20"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/sign_close"
+                android:layout_width="@dimen/dimen_32"
+                android:layout_height="@dimen/dimen_32"
+                android:layout_gravity="end"
+                android:src="@drawable/close_bk"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="end"
+                android:hint="@string/hint"
+                android:maxLength="11"
+                android:inputType="phone"
+                android:textSize="@dimen/size_18"
+                android:textCursorDrawable="@drawable/cursor_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:gravity="end"
+                android:maxLength="20"
+                android:textSize="@dimen/size_18"
+                android:hint="@string/hint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:gravity="end"
+                android:maxLength="12"
+                android:textSize="@dimen/size_18"
+                android:hint="@string/hint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_age"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="end"
+                android:maxLength="3"
+                android:inputType="number"
+                android:textSize="@dimen/size_18"
+                android:hint="@string/hint" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4"
+                android:text="@string/unit_age"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/size_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_12"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_height"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_height"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="end"
+                android:maxLength="3"
+                android:inputType="number"
+                android:textSize="@dimen/size_18"
+                android:hint="@string/hint" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4"
+                android:text="@string/unit_cm"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/size_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_line2"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_kg"
+                android:textColor="@color/label"
+                android:textSize="@dimen/size_18" />
+
+            <EditText
+                android:id="@+id/sign_edit_kg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:maxLength="5"
+                android:inputType="number"
+                android:textAlignment="textEnd"
+                android:textSize="@dimen/size_18"
+                android:hint="@string/hint" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4"
+                android:text="@string/unit_kg"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/size_14" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sign_edit_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_32"
+            android:paddingVertical="@dimen/dimen_12"
+            android:textSize="@dimen/size_20"
+            android:textStyle="bold"
+            android:text="@string/commit2" />
+    </LinearLayout>
+</FrameLayout>

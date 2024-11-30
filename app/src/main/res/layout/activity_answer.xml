@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/dimen_6"
+        android:layout_marginBottom="@dimen/dimen_8"
+        tools:ignore="UselessParent">
+        <Button
+            android:id="@+id/answer_last"
+            android:layout_width="@dimen/dimen_72"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingHorizontal="0dp"
+            android:text="@string/last"
+            android:textSize="@dimen/size_16"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/transparent"/>
+
+        <TextView
+            android:id="@+id/answer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/size_20"
+            android:textStyle="bold"
+            android:text="@string/answer_title"/>
+
+        <Button
+            android:id="@+id/answer_next"
+            android:layout_width="@dimen/dimen_72"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingHorizontal="0dp"
+            android:text="@string/next"
+            android:textSize="@dimen/size_16"
+            android:textColor="@color/colorPrimary"
+            android:background="@color/transparent"/>
+    </FrameLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/answer_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"/>
+
+</LinearLayout>

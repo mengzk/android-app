@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/dimen_16"
+    android:paddingVertical="@dimen/dimen_16">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_230">
+            <ImageView
+                android:id="@+id/result_avatar"
+                android:layout_width="@dimen/dimen_128"
+                android:layout_height="@dimen/dimen_200"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitXY"/>
+            <TextView
+                android:id="@+id/result_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16"
+                app:layout_constraintTop_toTopOf="@+id/result_avatar"
+                app:layout_constraintLeft_toRightOf="@+id/result_avatar"
+                android:text="@string/email"/>
+
+            <TextView
+                android:id="@+id/sign_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@+id/result_name"
+                app:layout_constraintTop_toBottomOf="@+id/result_name"
+                android:text="@string/phone" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结果" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="建议" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="问答" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="内容" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

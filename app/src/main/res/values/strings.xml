@@ -1,5 +1,26 @@
 <resources>
-    <string name="app_name">Chat</string>
+    <string name="app_name">Health</string>
+    <string name="home_name">健康检测</string>
     <string name="ok">确定</string>
     <string name="commit">确定</string>
+    <string name="commit2">确 定</string>
+    <string name="hint">请输入</string>
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="next">下一步</string>
+    <string name="last">上一步</string>
+
+    <string name="sign_title">请输入个人信息</string>
+    <string name="answer_title">问卷调查</string>
+
+    <string name="phone">手机号</string>
+    <string name="email">邮箱</string>
+    <string name="user_name">姓名</string>
+    <string name="user_age">年龄</string>
+    <string name="user_height">身高</string>
+    <string name="user_kg">体重</string>
+
+    <string name="unit_cm">厘米</string>
+    <string name="unit_kg">公斤</string>
+    <string name="unit_age">周岁</string>
 </resources>
