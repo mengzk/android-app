@@ -4,23 +4,65 @@
     <string name="ok">确定</string>
     <string name="commit">确定</string>
     <string name="commit2">确 定</string>
+    <string name="submit">提交</string>
+    <string name="submit2">提 交</string>
     <string name="hint">请输入</string>
+    <string name="select">请选择</string>
     <string name="cancel">取消</string>
     <string name="back">返回</string>
     <string name="next">下一步</string>
     <string name="last">上一步</string>
+    <string name="complete">完成</string>
+    <string name="video">视频</string>
+    <string name="photo">照片</string>
+    <string name="album">相册</string>
+    <string name="camera">相机</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="loading">加载中…</string>
+    <string name="result">查看结果</string>
+    <string name="look">立即查看</string>
 
     <string name="sign_title">请输入个人信息</string>
     <string name="answer_title">问卷调查</string>
 
+    <string name="now_play">立即体验</string>
+    <string name="pulse_start">开始测量</string>
+    <string name="pulse_stop">停止测量</string>
+    <string name="pulse_status">心率检测</string>
+    <string name="pulse_complete">脉诊测量完成</string>
+    <string name="pulse_fail">脉诊测量失败</string>
+
+    <string name="tongue_verso">舌苔反面照</string>
+    <string name="tongue_front">舌苔正面照</string>
+    <string name="tongue_face">正脸照片</string>
+    <string name="tongue_hint">请完成以下舌苔位置照片拍照</string>
+
+    <string name="pulse_hint">请将脉诊仪夹到左手食指上, 点击</string>
+    <string name="cut_hand">切换到右手</string>
+    <string name="left_hand">左手</string>
+    <string name="right_hand">右手</string>
+    <string name="zero">0%</string>
+    <string name="hundred">100%</string>
+    <string name="three">3</string>
+    <string name="two">2</string>
+    <string name="one">1</string>
+
+    <string name="login_title">登录</string>
     <string name="phone">手机号</string>
     <string name="email">邮箱</string>
+    <string name="auth_code">验证码</string>
     <string name="user_name">姓名</string>
-    <string name="user_age">年龄</string>
+    <string name="user_age">出生日期</string>
     <string name="user_height">身高</string>
     <string name="user_kg">体重</string>
-
+    <string name="user_sex">性别</string>
+    <string name="get_code">获取验证码</string>
     <string name="unit_cm">厘米</string>
-    <string name="unit_kg">公斤</string>
+    <string name="unit_kg">KG</string>
     <string name="unit_age">周岁</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="check_complete">诊断完成</string>
+    <string name="look_result">是否立即查看诊断结果</string>
 </resources>

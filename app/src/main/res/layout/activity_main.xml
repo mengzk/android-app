@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/dimen_20"
-    android:background="@color/black_bg">
+    android:background="@color/pageBg"
+    android:paddingHorizontal="@dimen/dimen_24">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:text="@string/home_name"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="@dimen/size_50"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_marginBottom="@dimen/dimen_96"/>-->
+    <ImageView
+        android:id="@+id/main_logo"
+        android:layout_width="@dimen/dimen_160"
+        android:layout_height="@dimen/dimen_160" />
 
     <GridView
         android:id="@+id/main_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:horizontalSpacing="@dimen/dimen_12"
         android:numColumns="2"
         android:verticalSpacing="@dimen/dimen_12"
-        android:horizontalSpacing="@dimen/dimen_12"
-        />
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/guide_button3"
-        android:layout_width="wrap_content"
+        android:id="@+id/now_playing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/dimen_96"
+        android:text="@string/now_play"
+        android:textSize="@dimen/size_26"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/chat_current_input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:text="Click Me" />
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/dimen_50"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_26"
+        android:textStyle="bold" />
 
 </FrameLayout>

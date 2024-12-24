@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/dimen_16"
+    android:paddingHorizontal="@dimen/dimen_14"
+    android:background="@drawable/bg_msg"
+    android:id="@+id/panel_grid_item">
+
+    <TextView
+        android:id="@+id/panel_grid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_22"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/home_grid_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/panel_grid_name"
+        app:layout_constraintStart_toStartOf="@id/panel_grid_name"
+        android:layout_marginTop="@dimen/dimen_12"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/dimen_16"
+    android:paddingHorizontal="@dimen/dimen_16"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/size_22"
+        android:textColor="@color/title"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/dimen_16"
+        android:text="@string/check_complete"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/size_18"
+        android:textColor="@color/title"
+        android:layout_marginBottom="@dimen/dimen_16"
+        android:text="@string/look_result"/>
+<!--    <Button-->
+<!--        android:id="@+id/edit_commit"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/dimen_16"-->
+<!--        android:text="@string/commit"/>-->
+</LinearLayout>

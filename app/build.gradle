@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.dx.health'
+    namespace 'com.ql.health'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.dx.health"
+        applicationId "com.ql.health"
         minSdk 23
         targetSdk 34
         versionCode 10001

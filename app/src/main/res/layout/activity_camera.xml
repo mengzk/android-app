@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/pageBg">
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/preview_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:id="@+id/count_down_box"
-        android:layout_width="@dimen/dimen_180"
-        android:layout_height="@dimen/dimen_180"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/bg_timer">
+        <LinearLayout
+            android:id="@+id/count_down_box"
+            android:layout_width="@dimen/dimen_180"
+            android:layout_height="@dimen/dimen_180"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/bg_timer">
+            <TextView
+                android:id="@+id/count_down_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/three"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_128" />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/count_down_timer"
+            android:id="@+id/face_detect_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/size_128" />
-    </LinearLayout>
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="@dimen/dimen_56"
+            android:visibility="gone"
+            android:text="请对准人脸"
+            android:textSize="@dimen/size_20"
+            android:textColor="@android:color/white"/>
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/camera_capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Capture"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="16dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_160">
+        <ImageView
+            android:id="@+id/camera_capture"
+            android:layout_width="@dimen/dimen_80"
+            android:layout_height="@dimen/dimen_80"
+            android:background="@drawable/camera_btn"
+            android:layout_gravity="center" />
 
-    <Button
-        android:id="@+id/camera_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Record"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="80dp" />
-</FrameLayout>
+        <ImageView
+            android:id="@+id/camera_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/stop_circle"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</LinearLayout>

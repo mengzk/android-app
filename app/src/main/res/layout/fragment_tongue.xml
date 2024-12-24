@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data></data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/dimen_24">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tongue_hint"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_18"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_24"
+                    android:background="@drawable/cover_line"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_16">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover" />
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_24"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimen_24"
+                        android:text="@string/tongue_front"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_24"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/tongue_front_img"
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dimen_32"
+                    android:background="@drawable/cover_line"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_16">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover" />
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_24"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimen_24"
+                        android:text="@string/tongue_verso"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_24"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/tongue_verso_img"
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cover_line"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_16">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover" />
+
+                    <TextView
+                        android:layout_width="@dimen/dimen_24"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dimen_24"
+                        android:text="@string/tongue_face"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_24"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/tongue_face_img"
+                        android:layout_width="@dimen/dimen_160"
+                        android:layout_height="@dimen/dimen_200"
+                        android:background="@drawable/bg_cover"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/tongue_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_72"
+            android:layout_marginVertical="@dimen/dimen_16"
+            android:layout_marginHorizontal="@dimen/dimen_24"
+            android:text="@string/submit2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_24"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>

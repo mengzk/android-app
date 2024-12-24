@@ -5,7 +5,7 @@
     app:startDestination="@id/detectionFragment">
     <fragment
         android:id="@+id/detectionFragment"
-        android:name="com.dx.health.ui.fragment.DetectionFragment"
+        android:name="com.ql.health.ui.fragment.DetectionFragment"
         android:label="MenuFragment">
         <action
             android:id="@+id/detection_to_psychologyFragment"
@@ -20,15 +20,15 @@
 
     <fragment
         android:id="@+id/pulseFragment"
-        android:name="com.dx.health.ui.fragment.PulseFragment"
+        android:name="com.ql.health.ui.fragment.PulseFragment"
         android:label="PulseFragment" />
 
     <fragment
         android:id="@+id/psychologyFragment"
-        android:name="com.dx.health.ui.fragment.PsychologyFragment"
+        android:name="com.ql.health.ui.fragment.PsychologyFragment"
         android:label="PsychologyFragment" />
     <fragment
         android:id="@+id/ZYIFragment"
-        android:name="com.dx.health.ui.fragment.ZYIFragment"
+        android:name="com.ql.health.ui.fragment.ZYIFragment"
         android:label="ZYIFragment" />
 </navigation>
