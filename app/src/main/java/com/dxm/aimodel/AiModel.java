@@ -11,7 +11,7 @@ import com.dxm.aimodel.utils.DeviceUtils;
  * Modify: 2024/03/28
  * Desc:
  */
-public class RobotApp extends Application {
+public class AiModel extends Application {
 
     @Override
     public void onCreate() {

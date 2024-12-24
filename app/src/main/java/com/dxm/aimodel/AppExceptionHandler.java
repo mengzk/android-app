@@ -157,7 +157,7 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
                 e.printStackTrace();
             }
             fos.close();
-            Log.i(TAG, "writeFile: " + path + fileName);
+            Log.i(TAG, "writeFile: " + path +"/"+ fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }

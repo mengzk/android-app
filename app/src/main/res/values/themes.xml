@@ -1,23 +1,37 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="aimodel" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!--    <style name="AiModel" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+    <style name="AiModel" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+<!--        <item name="android:background">@color/background</item>-->
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
-    <style name="TextStyle">
-        <!-- Customize your theme here. -->
-        <item name="android:textSize">@dimen/size_16</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/colorPrimary</item>
+<!--    <style name="TextStyle">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="android:textSize">@dimen/size_16</item>-->
+<!--        <item name="android:textColor">@android:color/white</item>-->
+<!--        <item name="android:background">@color/colorPrimary</item>-->
+<!--    </style>-->
+
+    <style name="EditTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 </resources>

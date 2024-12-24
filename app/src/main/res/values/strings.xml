@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Chat</string>
+    <string name="app_name">AiModel</string>
     <string name="ok">确定</string>
     <string name="commit">确定</string>
+    <string name="hint">请输入</string>
+
+    <string name="phone">手机号</string>
+    <string name="email">邮箱</string>
+    <string name="user_name">姓名</string>
+    <string name="user_age">年龄</string>
+    <string name="user_height">身高</string>
+    <string name="user_kg">体重</string>
 </resources>

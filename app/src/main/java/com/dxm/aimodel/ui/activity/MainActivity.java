@@ -11,6 +11,7 @@ import com.dxm.aimodel.base.Loading;
 import com.dxm.aimodel.modules.model.entity.HomeItem;
 import com.dxm.aimodel.service.UpdateService;
 import com.dxm.aimodel.ui.adapter.HomeAdapter;
+import com.dxm.aimodel.utils.DialogUtils;
 import com.dxm.aimodel.utils.PermissionManager;
 import com.dxm.aimodel.utils.PermissionUtils;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class MainActivity extends AppActivity {
     }
 
     private void initView() {
+//        startActivity(new Intent(this, H5Activity.class));
         itemList.add(new HomeItem("中医检测", "基于现有中医大数据模型", 1));
         itemList.add(new HomeItem("健康检测", "采用全国健康大数据模型", 2));
         itemList.add(new HomeItem("检测规范", "检测中要求与规范说明", 3));
@@ -60,10 +62,10 @@ public class MainActivity extends AppActivity {
                 intent.putExtra("mode", mode);
                 break;
             case 2:
-                intent = new Intent(this, ModelActivity.class);
+                DialogUtils.inputDialog(this);
                 break;
             case 3:
-                intent = new Intent(this, BleActivity.class);
+                intent = new Intent(this, CameraActivity.class);
                 break;
             case 4:
                 intent = new Intent(this, H5Activity.class);

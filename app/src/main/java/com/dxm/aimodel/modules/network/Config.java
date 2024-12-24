@@ -20,13 +20,17 @@ public class Config {
         hostMap = new HashMap<String, String>();
         // 生产环境 -prod
         hostMap.put("ws-prod", "ws://8.133.188.219:80");
-        hostMap.put("def-prod", "https://sp.bnq.com.cn/web");
+        hostMap.put("api-prod", "http://192.168.253.155:8093");
         hostMap.put("chat-prod", "https://open.bigmodel.cn/api/");
+        hostMap.put("health-prod", "https://open.bigmodel.cn/api/");
+        hostMap.put("diagnose-prod", "https://open.bigmodel.cn/api/");
 
         // 测试环境 -test 192.168.0.105
         hostMap.put("ws-test", "ws://8.133.188.219:80?uid=");
-        hostMap.put("def-test", "http://8.133.188.219:8080");
+        hostMap.put("api-test", "http://192.168.253.155:8093");
         hostMap.put("chat-test", "https://open.bigmodel.cn/api/");
+        hostMap.put("health-test", "https://open.bigmodel.cn/api/");
+        hostMap.put("diagnose-test", "https://open.bigmodel.cn/api/");
 
     }
 

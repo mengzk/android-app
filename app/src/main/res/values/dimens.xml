@@ -31,6 +31,7 @@
     <dimen name="dimen_128">128dp</dimen>
     <dimen name="dimen_144">144dp</dimen>
     <dimen name="dimen_180">180dp</dimen>
+    <dimen name="dimen_200">200dp</dimen>
     <dimen name="dimen_230">230dp</dimen>
 
     <dimen name="size_10">10sp</dimen>

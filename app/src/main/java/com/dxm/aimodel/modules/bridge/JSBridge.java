@@ -1,8 +1,13 @@
 package com.dxm.aimodel.modules.bridge;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
 import android.widget.Toast;
+
+import com.dxm.aimodel.R;
 
 /**
  * Author: Meng
@@ -14,8 +19,67 @@ import android.widget.Toast;
 public class JSBridge {
     private static final String TAG = "Native";
     private  Context context;
-    public JSBridge(Context context) {
+    private WebView webView;
+
+    public JSBridge(Context context, WebView webView) {
         this.context = context;
+        this.webView = webView;
+    }
+
+    public void destroy() {
+        webView.removeJavascriptInterface("bridge");
+        webView.destroy();
+        context = null;
+        webView = null;
+    }
+
+    /**
+     * 调用原生方法
+     */
+    @JavascriptInterface
+    public void test(String json) {
+        Log.i(TAG, "test: " + json);
+    }
+
+    /**
+     * 调用原生异步方法
+     * <body>
+     *   <button onclick="callAndroid()">Call Android</button>
+     *
+     *   <script type="text/javascript">
+     *     bridge.asyncTest("1234567890", "onAsyncRes");
+     *     window.onAsyncRes = (msg) => {
+     *       console.log('onAsyncRes', msg);
+     *     }
+     *     或者
+     *     function onAsyncRes() {
+     *       console.log('onAsyncRes', msg);
+     *     }
+     *   </script>
+     * </body>
+     */
+    @JavascriptInterface
+    public void asyncTest(String json, final String callback) {
+        Log.i(TAG, "test: " + json);
+        Log.i(TAG, "callWithResult: " + callback);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    final String result = "Result from Android";
+                    // Run on UI thread to call JavaScript
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.evaluateJavascript("javascript:" + callback + "('" + result + "')", null);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     /**
@@ -23,7 +87,7 @@ public class JSBridge {
      */
     @JavascriptInterface
     public void call(String json) {
-
+        Log.i(TAG, "call: " + json);
     }
 
     /**

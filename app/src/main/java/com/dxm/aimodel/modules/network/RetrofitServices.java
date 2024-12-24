@@ -18,6 +18,7 @@ public class RetrofitServices {
 
     private AppApi appApi;
     private ChatApi chatApi;
+
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .client(Network.client())
             .addConverterFactory(MyGsonConverterFactory.create());
@@ -37,7 +38,7 @@ public class RetrofitServices {
     }
 
     private void setAppApi() {
-        String url = Config.getTagHost("def");
+        String url = Config.getTagHost("api");
         Retrofit retrofit = builder.baseUrl(url)
                 .build();
         appApi = retrofit.create(AppApi.class);

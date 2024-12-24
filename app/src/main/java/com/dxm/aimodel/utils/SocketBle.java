@@ -30,7 +30,7 @@ public class SocketBle {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        new Server();
+//        new Server();
     }
 
     public static class Server {
