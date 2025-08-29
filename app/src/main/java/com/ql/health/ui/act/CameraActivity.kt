@@ -5,16 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Size
 import android.view.View
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
-import androidx.camera.core.impl.MutableOptionsBundle
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.video.FileOutputOptions
 import androidx.camera.video.Recorder
@@ -38,12 +36,15 @@ import java.util.concurrent.ExecutionException
  * Desc:
  */
 class CameraActivity : AppActivity() {
+    private val TAG = "CameraActivity"
     private var downText: TextView? = null
     private var hintText: TextView? = null
+    private var maskView: ImageView? = null
     private var videoCapture: VideoCapture<Recorder>? = null
     private var imageCapture: ImageCapture? = null
     private var recording: Recording? = null
-    private val TAG = "CameraActivity"
+    private var cameraProvider: ProcessCameraProvider? = null
+    private var front = true
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +57,18 @@ class CameraActivity : AppActivity() {
 
         downText = findViewById(R.id.count_down_timer)
         hintText = findViewById(R.id.face_detect_hint)
+        maskView = findViewById(R.id.mask_image)
+
+        val hintView = findViewById<TextView>(R.id.page_top_title)
+        hintView.text = when (mode) {
+            1 -> "现在开始舌诊,请您伸出舌头置于图框内,并点击扫描按钮."
+            2 -> "请把舌尖顶住上颚,暴露出舌下部位,并点击扫描按钮."
+            else -> "接下来开始面诊,请将面部图像置于图框内."
+        }
+        if(mode == 3) {
+            maskView!!.setImageResource(R.mipmap.face_mask)
+        }
+
         val recordButton = findViewById<View>(R.id.camera_record)
         recordButton.setOnClickListener { v: View? ->
             if (recording != null) {
@@ -69,6 +82,10 @@ class CameraActivity : AppActivity() {
         val captureButton = findViewById<View>(R.id.camera_capture)
         captureButton.setOnClickListener { v: View? ->
             takePicture()
+        }
+
+        findViewById<View>(R.id.camera_switch).setOnClickListener {
+            switchCamera()
         }
     }
 
@@ -94,6 +111,14 @@ class CameraActivity : AppActivity() {
         })
     }
 
+    private fun switchCamera() {
+        front = !front
+        if(cameraProvider != null) {
+            cameraProvider!!.unbindAll()
+            bindPreview(cameraProvider!!)
+        }
+    }
+
     private fun onRecording() {
         startRecording()
         val timerUtil = TimerUtil()
@@ -115,8 +140,8 @@ class CameraActivity : AppActivity() {
 
         cameraProviderFuture.addListener({
             try {
-                val cameraProvider = cameraProviderFuture.get()
-                bindPreview(cameraProvider)
+                cameraProvider = cameraProviderFuture.get()
+                bindPreview(cameraProvider!!)
 //                onDown() // 倒计时
             } catch (e: ExecutionException) {
                 Log.e(TAG, "Error starting camera: ", e)
@@ -139,8 +164,9 @@ class CameraActivity : AppActivity() {
             .build()
 
         // LENS_FACING_FRONT or LENS_FACING_BACK
+        val facing = if (front) CameraSelector.LENS_FACING_FRONT else CameraSelector.LENS_FACING_BACK
         val cameraSelector = CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .requireLensFacing(facing)
             .build()
 
         preview.setSurfaceProvider(previewView.surfaceProvider)

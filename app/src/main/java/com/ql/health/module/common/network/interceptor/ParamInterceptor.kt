@@ -18,20 +18,18 @@ import okio.IOException
 .build();
  */
 class ParamInterceptor : Interceptor {
-    val version = Build.VERSION.SDK_INT
-    val device = Build.DEVICE
+    val userAgent = ""
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-
         val result = chain.request()
-
         val builder = result.newBuilder()
 //            .addHeader("Cache-Control", "max-age=300")
 //            .addHeader("Accept", "application/json")
             .addHeader("Content-Type", "application/json;charset=UTF-8")
-            .addHeader("userAgent", "version:$version,device:$device")
-            .addHeader("Authorization", "Bearer ${Consts.USER_TOKEN}")
+            .addHeader("userAgent", Consts.USER_AGENT)
+            .addHeader("Authorization", Consts.USER_TOKEN)
+            .addHeader("sn", Consts.DEVICE_SN)
 //            .addHeader("Token", Consts.USER_TOKEN)
 
 //        if(result.method.lowercase() == "get") {

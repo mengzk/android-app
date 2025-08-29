@@ -42,7 +42,7 @@
 
         android:textColor="@color/title"
         android:textSize="@dimen/size_14"
-        android:background="@drawable/bg_msg2"/>
+        android:background="@drawable/bg_btn"/>
     <ImageView
         android:id="@+id/chat_item_icon2"
         android:layout_width="@dimen/dimen_40"

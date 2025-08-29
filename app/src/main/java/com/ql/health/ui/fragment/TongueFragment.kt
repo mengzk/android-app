@@ -3,21 +3,21 @@ package com.ql.health.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import com.ql.health.R
 import com.ql.health.config.Consts
-import com.ql.health.custom.AppFragment
+import com.ql.health.custom.VMFragment
 import com.ql.health.custom.widget.LoadAnim
 import com.ql.health.databinding.FragmentTongueBinding
-import com.ql.health.model.body.TongueBody
-import com.ql.health.model.entity.TongueEntity
 import com.ql.health.module.common.network.RFCallback
-import com.ql.health.module.event.Bus
 import com.ql.health.module.network.Client
-import com.ql.health.ui.act.CameraActivity
+import com.ql.health.module.robot.RobotMsg
+import com.ql.health.ui.act.PhotoActivity
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -25,8 +25,9 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class TongueFragment : AppFragment<FragmentTongueBinding>(R.layout.fragment_tongue) {
+class TongueFragment : VMFragment<FragmentTongueBinding>(R.layout.fragment_tongue) {
     private val TAG = "TongueFragment"
+    private var topView: TextView? = null
     private var curIndex = 0
     private var imgPath1 = ""
     private var imgPath2 = ""
@@ -36,12 +37,21 @@ class TongueFragment : AppFragment<FragmentTongueBinding>(R.layout.fragment_tong
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             Log.i(TAG, "onActivityResult: ${it.resultCode}")
             if (it.resultCode == RESULT_OK && it.data != null) {
-                onCameraBack(it.data!!.getStringExtra("path") ?: "")
+                Log.i(TAG, "onActivityResult: ${it.data!!.getIntExtra("skip", 0)}")
+                val code = it.data!!.getIntExtra("skip", 0)
+                if(code == 1) {
+//                    sendEvent(Bus.Action("tongue", 0, ""))
+                    gotoResult("")
+                }else {
+                    onCameraBack(it.data!!.getStringExtra("path") ?: "")
+                }
             }
         }
 
     override fun lazyInit(binding: FragmentTongueBinding) {
 
+        topView = activity.findViewById(R.id.page_top_title)
+        topView?.text = "请按照提示，完成舌苔检测"
         binding.tongueFrontImg.setOnClickListener {
             takePicture(1)
         }
@@ -54,12 +64,22 @@ class TongueFragment : AppFragment<FragmentTongueBinding>(R.layout.fragment_tong
         binding.tongueSubmit.setOnClickListener {
             onCommit()
         }
+        binding.tongueReset.setOnClickListener {
+            imgPath1 = ""
+            imgPath2 = ""
+            imgPath3 = ""
+            takePicture(1)
+        }
+
+        takePicture(1)
+
+        RobotMsg.speech("请按照提示，完成舌苔检测! ")
     }
 
     private fun takePicture(index: Int) {
         curIndex = index
-        val intent = Intent(activity, CameraActivity::class.java)
-        intent.putExtra("mode", 1)
+        val intent = Intent(activity, PhotoActivity::class.java)
+        intent.putExtra("mode", index)
         launcher.launch(intent)
     }
 
@@ -71,32 +91,28 @@ class TongueFragment : AppFragment<FragmentTongueBinding>(R.layout.fragment_tong
                 1 -> {
                     imgPath1 = path
                     tongueFrontImg.setImageURI(Uri.fromFile(file))
+
+                    curIndex = 2
+                    takePicture(2)
                 }
 
                 2 -> {
                     imgPath2 = path
                     tongueVersoImg.setImageURI(Uri.fromFile(file))
+
+                    curIndex = 3
+                    takePicture(3)
                 }
 
                 3 -> {
                     imgPath3 = path
                     tongueFaceImg.setImageURI(Uri.fromFile(file))
+
+                    // 上传图片
+                    onCommit()
                 }
             }
         }
-    }
-
-    private fun uploadImage(file: File, index: Int) {
-
-        val requestFile = file.asRequestBody(Client.ImageType)
-        val body: MultipartBody.Part =
-            MultipartBody.Part.createFormData("file", file.name, requestFile)
-
-        Client.main.upload(body).enqueue(object : RFCallback<Any>() {
-            override fun onResult(res: Any) {}
-
-            override fun onFail(code: Int, e: Throwable) {}
-        })
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -137,14 +153,27 @@ class TongueFragment : AppFragment<FragmentTongueBinding>(R.layout.fragment_tong
             .enqueue(object : RFCallback<String>() {
                 override fun onResult(res: String) {
                     LoadAnim.dismiss()
-                    Bus.send("check-event", Bus.Action("tongue", 0, res))
+//                    sendEvent(Bus.Action("tongue", 0, res))
+                    gotoResult(res)
                 }
 
                 override fun onFail(code: Int, e: Throwable) {
                     LoadAnim.dismiss()
-                    onToast("诊断失败，请重新提交")
+                    val msg = e.message ?: "诊断失败，请重新提交"
+                    onToast(msg)
+                    topView?.text = msg
+                    binding.tongueHint.text = msg
                 }
             })
+    }
+
+    private fun gotoResult(msg: String) {
+        val pulseRes = arguments?.getString("pulse") ?: ""
+        val bun = Bundle()
+        bun.putString("tongue", msg)
+        bun.putString("pulse", pulseRes)
+        navigateTo(R.id.tongue_to_result, bun)
+
     }
 
     private fun onToast(text: String) {

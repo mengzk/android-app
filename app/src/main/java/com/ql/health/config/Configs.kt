@@ -10,6 +10,7 @@ object Configs {
     private var env: String = "test"
     const val secret: String = ""
     const val apiId: String = ""
+    const val h5Url: String = "https://www.aimlai.com/health/#/"
 
     fun getEnv(): String {
         return env
@@ -21,9 +22,9 @@ object Configs {
 
     fun getDomain(env: String): String {
         return when (env) {
-            "test" -> "http://aimlai.com"
+            "test" -> "https://aimlai.com"
             "dev" -> "http://192.168.31.141:8093"
-            else -> "https://def.prod.com"
+            else -> "https://aimlai.com"
         }
     }
 }

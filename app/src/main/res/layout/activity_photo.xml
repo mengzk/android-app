@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/pageBg">
+
+    <FrameLayout
+        android:id="@+id/preview_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextureView
+            android:id="@+id/texture_preview"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom|center_horizontal"
+            />
+
+        <ImageView
+            android:id="@+id/face_mask"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@mipmap/face_mask"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="@dimen/dimen_12"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:layout_marginHorizontal="@dimen/dimen_24"
+            android:background="@drawable/bg_box">
+            <TextView
+                android:id="@+id/top_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/dimen_12"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_14" />
+
+            <TextView
+                android:id="@+id/skip_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dimen_2"
+                android:paddingHorizontal="@dimen/dimen_12"
+                android:textStyle="bold"
+                android:textSize="@dimen/size_14"
+                android:textColor="@color/orange"
+                android:text="@string/skip" />
+        </LinearLayout>
+
+        <com.ql.health.custom.widget.FocusView
+            android:id="@+id/focus_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginBottom="@dimen/dimen_30">
+
+        <Button
+            android:id="@+id/photo_capture"
+            style="@style/SingleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/dimen_16"
+            android:layout_marginHorizontal="@dimen/dimen_24"
+            android:layout_gravity="center"
+            android:text="@string/click_photo" />
+
+        <ImageView
+            android:id="@+id/switch_btn"
+            android:layout_width="@dimen/dimen_50"
+            android:layout_height="@dimen/dimen_50"
+            android:visibility="gone"
+            android:src="@drawable/camera_flip"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/dimen_50" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,20 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pageBg">
 
-    <data></data>
-
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_detection"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/pageBg">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/detection" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_detection"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/detection" />
-    </LinearLayout>
-</layout>
+    <TextView
+        android:id="@+id/goto_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/dimen_16"
+        android:layout_marginTop="@dimen/dimen_8"
+        android:paddingHorizontal="@dimen/dimen_12"
+        android:paddingVertical="@dimen/dimen_3"
+        android:background="@drawable/skip_line"
+        android:text="@string/home"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_14"
+        android:textStyle="bold"/>
+
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/dimen_46">-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="@dimen/size_18" />-->
+    <!--    </FrameLayout>-->
+</FrameLayout>

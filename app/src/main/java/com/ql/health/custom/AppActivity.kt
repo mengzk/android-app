@@ -1,9 +1,15 @@
 package com.ql.health.custom
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PersistableBundle
+import android.os.SystemClock
+import android.util.Log
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
-
+import com.ql.health.MainActivity
 
 /**
  * Author: Meng
@@ -12,6 +18,13 @@ import androidx.appcompat.app.AppCompatActivity
  * Desc:
  */
 open class AppActivity : AppCompatActivity() {
+    private var lastTouchTime = 0L
+    private var duration = 120000L
+    private val handler = Handler(Looper.getMainLooper())
+    private val returnHomeRunnable = Runnable {
+        openHomePage()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityStack.add(this)
@@ -23,6 +36,7 @@ open class AppActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        handler.removeCallbacks(returnHomeRunnable)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
@@ -32,9 +46,41 @@ open class AppActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         ActivityStack.remove(this)
+        handler.removeCallbacks(returnHomeRunnable)
     }
 
     override fun onNightModeChanged(mode: Int) {
         super.onNightModeChanged(mode)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_UP) {
+            lastTouchTime = SystemClock.elapsedRealtime()
+            Log.i("Activity", "-----> touch " + lastTouchTime)
+            handler.removeCallbacks(returnHomeRunnable)
+            handler.postDelayed(returnHomeRunnable, duration)
+        }
+        return super.onTouchEvent(event)
+    }
+
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        return super.dispatchTouchEvent(ev)
+//    }
+
+
+    open fun setDuration(num: Long) {
+        duration = num
+    }
+
+
+    private fun openHomePage() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        ActivityStack.close()
+    }
+
+    open fun onEvent(data: Any) {
+
     }
 }

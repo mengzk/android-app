@@ -2,7 +2,6 @@ package com.ql.health.module.common.network.interceptor
 
 import com.ql.health.module.common.Log3
 import com.ql.health.module.common.exception.NetException
-import com.ql.health.module.common.log.LogStore
 import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.MediaType
@@ -78,12 +77,9 @@ class LogInterceptor : Interceptor {
                 Log3.i(tag, "---> url:$url, status:${response.code}, time:$time3")
                 Log3.i(tag, "---> Response: $resultJson")
             }
-            LogStore.add(url, method, response.code, time3, params, headers, resultJson)
-
             return response
         } catch (e: Exception) {
             Log3.e(tag, "---> Response:$url, err: ${e.message}")
-            LogStore.add(url, method, 403, time3, params, headers, e.message)
             throw NetException(e.message ?: "Err: $url failed connect ")
 //            return chain.proceed(request)
         }

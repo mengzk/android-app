@@ -81,4 +81,8 @@ open class AppFragment<VB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Fra
         super.onDestroyView()
         isLoaded = false
     }
+
+    open fun sendEvent(data: Any) {
+        (activity as AppActivity).onEvent(data)
+    }
 }

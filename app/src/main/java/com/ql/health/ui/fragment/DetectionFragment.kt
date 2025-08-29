@@ -1,43 +1,42 @@
 package com.ql.health.ui.fragment
 
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import android.util.Log
 import com.ql.health.R
 import com.ql.health.custom.VMFragment
-import com.ql.health.databinding.FragmentDetectionBinding
+import com.ql.health.databinding.NavDetectionBinding
 
-class DetectionFragment: VMFragment<FragmentDetectionBinding>(R.layout.fragment_detection) {
-    private var detection = 0;
+class DetectionFragment : VMFragment<NavDetectionBinding>(R.layout.nav_detection) {
 
-
-    override fun onBindView(binding: FragmentDetectionBinding, savedInstanceState: Bundle?) {
-        super.onBindView(binding, savedInstanceState)
-        this.binding = binding
+    override fun lazyInit(binding: NavDetectionBinding) {
+        initView()
     }
 
-    override fun lazyInit(binding: FragmentDetectionBinding) {
-        val title = activity.intent.getStringExtra("title")
-        detection = activity.intent.getIntExtra("menu", 0)
-        initView(binding)
+    private fun initView() {
+        Log.i("DetectionFragment", "-----> initView <-----")
+//        if (Consts.USER_NAME.isEmpty()) {
+//            gotoPersonal()
+//        } else {
+//            gotoPulse()
+//        }
     }
 
-    private fun initView(binding: FragmentDetectionBinding) {
+    private fun gotoPersonal() {
+        val bun = Bundle()
+        // 打开新页面, 并销毁当前页面
+        navigateTo(R.id.detection_to_personal, bun)
+//        findNavController().popBackStack()
+    }
 
-//        val lm = GridLayoutManager(activity, 3)
-//        val adapter = MenuAdapter(activity, itemList, menuColor)
-//        adapter.setItemClickListener(object: OnItemClickListener<MenuDao> {
-//            override fun itemClick(dao: MenuDao, position: Int) {
-//                startHandle(dao)
-//            }
-//        })
-//        binding.menuRecycler.layoutManager = lm
-//        binding.menuRecycler.adapter = adapter
+    private fun gotoPulse() {
+        val bun = Bundle()
+        navigateTo(R.id.detection_to_pulse, bun)   // 会销毁当前页面
+//        findNavController().popBackStack()
     }
 
     private fun openPage() {
         val bun = Bundle()
-        bun.putInt("detection", detection)
-        bun.putString("tag", "test")
-        navigateTo(R.id.detection_to_pulseFragment, bun)
+        bun.putString("tag", "-----> test <-----")
+//                navController.navigate(R.id.action_detectionFragment_to_testFragment, bun)
     }
 }

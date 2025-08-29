@@ -148,6 +148,7 @@ class JSBridge(private var context: Activity, private var webView: WebView) {
      */
     @JavascriptInterface
     fun close() {
+        context.finish()
     }
 
     /**

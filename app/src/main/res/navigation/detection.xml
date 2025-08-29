@@ -6,29 +6,60 @@
     <fragment
         android:id="@+id/detectionFragment"
         android:name="com.ql.health.ui.fragment.DetectionFragment"
-        android:label="MenuFragment">
+        android:label="DetectionFragment">
         <action
-            android:id="@+id/detection_to_psychologyFragment"
-            app:destination="@id/psychologyFragment" />
+            android:id="@+id/detection_to_personal"
+            app:destination="@id/personalFragment" />
         <action
-            android:id="@+id/detection_to_ZYIFragment"
-            app:destination="@id/ZYIFragment" />
+            android:id="@+id/detection_to_pulse"
+            app:destination="@id/pulseFragment" />
         <action
-            android:id="@+id/detection_to_pulseFragment"
+            android:id="@+id/detection_to_tongue"
+            app:destination="@id/tongueFragment" />
+        <action
+            android:id="@+id/detection_to_result"
+            app:destination="@id/resultFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.ql.health.ui.fragment.PersonalFragment"
+        android:label="PersonalFragment">
+        <action
+            android:id="@+id/personal_to_pulse"
             app:destination="@id/pulseFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/pulseFragment"
         android:name="com.ql.health.ui.fragment.PulseFragment"
-        android:label="PulseFragment" />
+        android:label="PulseFragment">
+        <action
+            android:id="@+id/pulse_to_tongue"
+            app:destination="@id/tongueFragment" />
+        <action
+            android:id="@+id/pulse_to_result"
+            app:destination="@id/resultFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/psychologyFragment"
-        android:name="com.ql.health.ui.fragment.PsychologyFragment"
-        android:label="PsychologyFragment" />
+        android:id="@+id/tongueFragment"
+        android:name="com.ql.health.ui.fragment.TongueFragment"
+        android:label="TongueFragment">
+        <action
+            android:id="@+id/tongue_to_result"
+            app:destination="@id/resultFragment" />
+    </fragment>
+
     <fragment
-        android:id="@+id/ZYIFragment"
+        android:id="@+id/resultFragment"
+        android:name="com.ql.health.ui.fragment.ResultFragment"
+        android:label="ResultFragment" />
+
+    <fragment
+        android:id="@+id/zYIFragment"
         android:name="com.ql.health.ui.fragment.ZYIFragment"
         android:label="ZYIFragment" />
+
 </navigation>

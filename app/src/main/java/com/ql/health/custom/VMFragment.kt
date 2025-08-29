@@ -15,8 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
-import androidx.navigation.fragment.NavHostFragment
-
+import androidx.navigation.fragment.findNavController
 
 /**
  * Author: Meng
@@ -33,7 +32,7 @@ open class VMFragment<VB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Frag
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = context as AppCompatActivity
+        activity = context as VMNavActivity
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -63,7 +62,7 @@ open class VMFragment<VB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Frag
     open fun lazyInit(binding: VB) {}
 
     private fun navigation(): NavController {
-        return NavHostFragment.findNavController(this)
+        return findNavController()
     }
 
     protected fun navigateTo(
@@ -74,6 +73,12 @@ open class VMFragment<VB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Frag
     ) {
         navigation().navigate(resId, args, navOptions, navExtras)
     }
+
+    protected fun popBack() {
+        navigation().popBackStack()
+    }
+
+
 
     protected fun onBackPressed() {
 //        val canBack = navigation().navigateUp()
@@ -98,5 +103,6 @@ open class VMFragment<VB : ViewDataBinding>(@LayoutRes val layoutId: Int) : Frag
     override fun onDestroyView() {
         super.onDestroyView()
         isLoaded = false
+        binding.unbind()
     }
 }

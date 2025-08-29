@@ -22,7 +22,7 @@ abstract class RFCallback<T> : Callback<BodyData<T>> {
 
         if (data != null) {
             try {
-                if (data.code == 0 && data.data != null) {
+                if ((data.code == 0 || data.code == 200 || data.code == 202) && data.data != null) {
                     onResult(data.data)
                 } else {
                     val exc = when (data.code) {

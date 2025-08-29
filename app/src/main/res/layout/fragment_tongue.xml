@@ -4,11 +4,22 @@
 
     <data></data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_24">
 
+        <include layout="@layout/page_top" />
+
+        <TextView
+            android:id="@+id/tongue_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_20"
+            android:textStyle="bold" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -22,22 +33,14 @@
                 android:orientation="vertical"
                 android:paddingVertical="@dimen/dimen_24">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tongue_hint"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_18"
-                    android:textStyle="bold" />
-
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_24"
                     android:background="@drawable/cover_line"
                     android:gravity="center"
-                    android:padding="@dimen/dimen_16">
+                    android:padding="@dimen/dimen_16"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/dimen_160"
@@ -68,7 +71,8 @@
                     android:layout_marginVertical="@dimen/dimen_32"
                     android:background="@drawable/cover_line"
                     android:gravity="center"
-                    android:padding="@dimen/dimen_16">
+                    android:padding="@dimen/dimen_16"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/dimen_160"
@@ -98,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/cover_line"
                     android:gravity="center"
-                    android:padding="@dimen/dimen_16">
+                    android:padding="@dimen/dimen_16"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="@dimen/dimen_160"
@@ -127,13 +132,20 @@
 
         <Button
             android:id="@+id/tongue_submit"
+            style="@style/SingleButton"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_72"
-            android:layout_marginVertical="@dimen/dimen_16"
-            android:layout_marginHorizontal="@dimen/dimen_24"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_36"
             android:text="@string/submit2"
-            android:textColor="@color/white"
-            android:textSize="@dimen/size_24"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/tongue_reset"
+            style="@style/SingleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_36"
+            android:layout_gravity="bottom"
+            android:text="@string/reset" />
+    </FrameLayout>
 </layout>

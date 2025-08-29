@@ -1,11 +1,12 @@
 package com.ql.health.ui.act
 
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import android.widget.TextView
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.ql.health.R
-import com.ql.health.custom.AppActivity
-import com.ql.health.databinding.ActDetectionBinding
+import com.ql.health.config.Consts
+import com.ql.health.custom.VMNavActivity
 
 /**
  * Author: Meng
@@ -13,28 +14,50 @@ import com.ql.health.databinding.ActDetectionBinding
  * Modify: 2024/11/21
  * Desc:
  */
-class DetectionActivity : AppActivity() {
-    private lateinit var binding: ActDetectionBinding
-
+class DetectionActivity : VMNavActivity() {
+    private var inited = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_result)
+        setContentView(R.layout.act_detection)
 
-        initView()
+        findViewById<TextView>(R.id.goto_home).setOnClickListener {
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(!inited) {
+            initView()
+        }
     }
 
     private fun initView() {
-        binding = DataBindingUtil.setContentView(this, R.layout.act_detection)
-        binding.lifecycleOwner = this
-
+        inited = true
+        val nav = Navigation.findNavController(this, R.id.nav_host_detection)
+        if (Consts.USER_NAME.isEmpty()) {
+            nav.navigate(R.id.detection_to_personal)
+        } else {
+            nav.navigate(R.id.detection_to_pulse)
+        }
     }
 
-    private fun onBack() {
-        val nav = Navigation.findNavController(this, R.id.fragment_detection)
-//        nav.popBackStack(R.id.menuFragment, false)
-        val back = nav.popBackStack()
-        if (!back) {
-            finish()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_detection)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val nav = findNavController(R.id.nav_host_detection)
+        nav.navigateUp()
+//        val isTop = nav.popBackStack()
+////        Log.i("DetectionActivity", "-----> top: $isTop")
+//        if (!isTop) {
+//            super.onBackPressed()
+//            finish()
+//        }
     }
 }

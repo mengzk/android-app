@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pageBg"
     android:paddingHorizontal="@dimen/dimen_24">
 
+    <TextView
+        android:id="@+id/main_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="@dimen/dimen_46"
+        android:background="@drawable/bg_box"
+        android:padding="@dimen/dimen_16"
+        android:text="@string/home_hallo"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_16" />
+
     <ImageView
         android:id="@+id/main_logo"
         android:layout_width="@dimen/dimen_160"
-        android:layout_height="@dimen/dimen_160" />
-
-    <GridView
-        android:id="@+id/main_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_120"
         android:layout_gravity="center"
-        android:horizontalSpacing="@dimen/dimen_12"
-        android:numColumns="2"
-        android:verticalSpacing="@dimen/dimen_12"
-        android:visibility="gone" />
+        android:src="@mipmap/robot" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <Button
-        android:id="@+id/now_playing"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_80"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="@dimen/dimen_96"
-        android:text="@string/now_play"
-        android:textSize="@dimen/size_26"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/chat_current_input"
+        android:id="@+id/goto_login"
+        style="@style/SingleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/dimen_50"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_26"
-        android:textStyle="bold" />
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/dimen_36"
+        android:text="@string/start_detection" />
 
 </FrameLayout>

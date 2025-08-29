@@ -75,8 +75,8 @@ interface MainApi {
     /**
      * 检测版本更新
      */
-    @GET("healthcare/appversion/checkVesion")
-    fun checkVersion(@Query("version") version: String, @Query("os") os: Long): Call<BodyData<Any>>
+    @GET("healthcare/api/appversion/checkVesion")
+    fun checkVersion(@Query("version") version: String, @Query("os") os: Long): Call<BodyData<UpdateEntity>>
 
     /**
      * 阶梯脉搏检测
@@ -104,6 +104,18 @@ interface MainApi {
      */
     @POST("healthcare/api/facetongue/detectionHealth")
     fun faceTongueReport(@Body body: TongueReportBody): Call<BodyData<Any>>
+
+    /**
+     * 保存用户信息
+     */
+    @POST("healthcare/api/user/profile/saveUserInfo")
+    fun saveUserInfo(@Body body: PersonalBody): Call<BodyData<Any>>
+
+    /**
+     * 更新用户信息
+     */
+    @POST("healthcare/api/user/profile/updateUserInfo")
+    fun updateUserInfo(@Body body: PersonalBody): Call<BodyData<Any>>
 
     /**
      *

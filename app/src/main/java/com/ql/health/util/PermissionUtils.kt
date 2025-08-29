@@ -249,4 +249,32 @@ object PermissionUtils {
         intent.data = uri
         context.startActivity(intent)
     }
+
+    fun isHasAudioPermission(context: Context?): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            context!!,
+            Manifest.permission.RECORD_AUDIO
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun requestAudioPermission(context: Context?) {
+        if (!isHasAudioPermission(context)) {
+            ActivityCompat.requestPermissions(
+                (context as Activity?)!!,
+                PERMISSION_AUDIO,
+                150
+            )
+        }
+    }
+
+    fun floatPermission(context: Context?): Boolean {
+        if (!Settings.canDrawOverlays(context)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + context!!.packageName))
+            context.startActivity(intent)
+            return false
+        }
+        return true
+    }
 }

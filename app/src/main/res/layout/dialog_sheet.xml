@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ListView
-        android:id="@+id/app_sheet_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/dialog_sheet_list"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp"
+        android:paddingHorizontal="24dp"
+        android:layout_gravity="center"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:background="@drawable/bg_pop"
         />
-</LinearLayout>
+</FrameLayout>

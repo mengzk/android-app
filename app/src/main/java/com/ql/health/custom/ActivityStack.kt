@@ -28,4 +28,36 @@ object ActivityStack {
         actStacks.remove(activity)
     }
 
+    fun get(index: Int): Activity {
+        return actStacks[index]
+    }
+
+    fun getTop(): Activity {
+        return actStacks.lastElement()
+    }
+
+    fun size(): Int {
+        return actStacks.size
+    }
+
+    fun close() {
+        val size = actStacks.size
+        for (i in 0 until size) {
+            actStacks.pop().finish()
+        }
+    }
+
+
+   fun top() {
+        // 返回到顶部
+        val size = actStacks.size
+        for (i in 0 until size - 1) {
+            actStacks.pop().finish()
+        }
+    }
+
+//    fun clear() {
+//        actStacks.clear()
+//    }
+
 }

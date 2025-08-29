@@ -8,9 +8,6 @@
         android:name="com.ql.health.ui.fragment.ResultFragment"
         android:label="ResultFragment">
         <action
-            android:id="@+id/result_to_psychologyFragment"
-            app:destination="@id/psychologyFragment" />
-        <action
             android:id="@+id/result_to_ZYIFragment"
             app:destination="@id/ZYIFragment" />
         <action
@@ -23,10 +20,6 @@
         android:name="com.ql.health.ui.fragment.PulseFragment"
         android:label="PulseFragment" />
 
-    <fragment
-        android:id="@+id/psychologyFragment"
-        android:name="com.ql.health.ui.fragment.PsychologyFragment"
-        android:label="PsychologyFragment" />
     <fragment
         android:id="@+id/ZYIFragment"
         android:name="com.ql.health.ui.fragment.ZYIFragment"

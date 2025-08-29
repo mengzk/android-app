@@ -30,8 +30,6 @@ import java.util.concurrent.Executors
 class UpdateService : JobService() {
     private val Tag = "UpdateService"
 //    private val JOB_ID = 1000
-    private val apkUrl =
-        "https://bnq-app-store.oss-cn-shanghai.aliyuncs.com/app_package/test/apk/shadowsocks/v1680750650870%26shadowsocks.apk" // 下载包安装路径
     private var savePath = ""
     private val apkName = "app_pack.apk"
     private var mContext: Context? = null
@@ -58,7 +56,7 @@ class UpdateService : JobService() {
             return
         }
         downing = true
-        Log.i(Tag, "=============> 开始下载")
+        Log.i(Tag, "---> 开始下载")
         val fos: FileOutputStream
         val ism: InputStream
         try {
@@ -73,17 +71,21 @@ class UpdateService : JobService() {
             }
             apkFile = File(savePath, apkName)
 
-            Log.i(Tag, "=============> APK Path $savePath")
+            Log.i(Tag, "---> APK Path $savePath")
 
             fos = FileOutputStream(apkFile)
             val total = conn.contentLength.toLong()
             var length = 0
             val buf = ByteArray(16384)
             var num = 0
+            var progress = 0
             while ((ism.read(buf).also { num = it }) > 0) {
                 length += num
-                val progress = (length * 100 / total).toInt()
-                Log.i(Tag, "=============> $progress")
+                val prog = (length * 100 / total).toInt()
+                if(progress != prog) {
+                    progress = prog
+                    Log.i(Tag, "---> $progress")
+                }
                 fos.write(buf, 0, num)
             }
             fos.flush()
@@ -104,11 +106,11 @@ class UpdateService : JobService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val isGranted = packageManager.canRequestPackageInstalls()
             if (!isGranted) {
-                Log.i(Tag, "=============> 请开启安装Apk权限")
+                Log.i(Tag, "---> 请开启安装Apk权限")
                 return
             }
         }
-        Log.i(Tag, "=============> apkFile: " + apkFile.path)
+        Log.i(Tag, "---> apkFile: " + apkFile.path)
         val intent = Intent(Intent.ACTION_VIEW)
         val uri: Uri
         try {
@@ -128,10 +130,10 @@ class UpdateService : JobService() {
                 intent.setAction(Intent.ACTION_VIEW)
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
-            Log.i(Tag, "=============> url:" + uri.path)
+            Log.i(Tag, "---> url:" + uri.path)
             intent.setDataAndType(uri, "application/vnd.android.package-archive")
             mContext!!.startActivity(intent)
-            Log.i(Tag, "=============> 安装中...")
+            Log.i(Tag, "---> 安装中...")
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -139,7 +141,9 @@ class UpdateService : JobService() {
 
     companion object {
         var JOB_CODE: Int = 1231
-        fun start(context: Context) {
+        var apkUrl = ""
+        fun start(context: Context, url: String) {
+            apkUrl = url
             val serviceName = ComponentName(context, UpdateService::class.java)
             val jobBuilder = JobInfo.Builder(JOB_CODE, serviceName)
             jobBuilder.setPeriodic((1000 * 60 * 15).toLong())

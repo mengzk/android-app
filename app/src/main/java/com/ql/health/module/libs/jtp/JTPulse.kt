@@ -1,6 +1,7 @@
 package com.ql.health.module.libs.jtp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
@@ -26,18 +27,26 @@ class JTPulse(private var context: Activity) {
     private var pulseTestManager: IPulseTestManager? = null
     private var pulseListener: OnPulseListener? = null
     private var curDevice: Device? = null
+    private var jtDevice: JTDevice? = null
     private lateinit var countDownTimer: CountDownTimer
     private var isScanning = false
     private var isPulse = false
+    private var isLoop = false
 
     // 初始化脉诊仪
     fun connect(listener: OnPulseListener) {
         pulseListener = listener
         if (isScanning) {
-            startPulse()
+//            startPulse()
+            pulseListener?.onResult("连接脉诊仪成功", false)
         } else {
             requestStoragePermission()
         }
+    }
+
+    fun onLoop() {
+        isLoop = true
+        requestStoragePermission()
     }
 
     fun stop() {
@@ -52,6 +61,11 @@ class JTPulse(private var context: Activity) {
             pulseTestManager!!.stopPulseTest()
         }
         isPulse = false
+        isLoop = false
+    }
+
+    fun getDevice(): JTDevice? {
+        return jtDevice
     }
 
     // 开始量测
@@ -64,6 +78,13 @@ class JTPulse(private var context: Activity) {
             return
         }
         pulseTestManager!!.startPulseTest(8000, pulseTestCallback)
+    }
+
+    fun stopTest() {
+        if (pulseTestManager != null) {
+            isPulse = false
+            pulseTestManager!!.stopPulseTest()
+        }
     }
 
     // 检查蓝牙是否开启
@@ -113,7 +134,7 @@ class JTPulse(private var context: Activity) {
 //        Toast.makeText(context, "开始扫描蓝牙", Toast.LENGTH_SHORT).show()
         deviceScanner!!.startScan(deviceScanCallback)
         // 倒计时 30s 后停止扫描
-        startCountdownTimer(10000)
+        startCountdownTimer(20000)
     }
 
     private fun startCountdownTimer(millis: Long) {
@@ -126,9 +147,12 @@ class JTPulse(private var context: Activity) {
                     deviceScanner!!.stopScan()
                 }
                 isPulse = false
-                onToast("未扫描到脉诊仪设备")
+//                onToast("未扫描到脉诊仪设备")
                 pulseListener?.onResult("未扫描到脉诊仪设备", true)
                 countDownTimer.cancel()
+                if(isLoop) {
+                    initBluetooth()
+                }
             }
         }.start()
     }
@@ -138,6 +162,7 @@ class JTPulse(private var context: Activity) {
 
         override fun onDeviceDiscovered(device: Device) {
             Log.d(TAG, "扫描到蓝牙设备：${device.name}")
+
             context.runOnUiThread {
                 if (device.name == null) {
                     pulseListener?.onResult("未扫描到脉诊仪设备", true)
@@ -146,6 +171,7 @@ class JTPulse(private var context: Activity) {
                     deviceScanner!!.stopScan()
 //                    onToast("开始连接脉诊仪蓝牙")
                     curDevice = device
+                    jtDevice = JTDevice(device.name!!, device.mac!!, device.deviceModel!!)
                     deviceSession!!.connect(device, connectDeviceCallback)
                 }
             }
@@ -165,14 +191,17 @@ class JTPulse(private var context: Activity) {
                     ConnectionState.STATE_DISCONNECTING, ConnectionState.STATE_DISCONNECTED -> {
                         isScanning = false
                         isPulse = false
+                        jtDevice = null
                         pulseListener?.onResult("连接脉诊仪失败", true)
                     }
 
                     ConnectionState.STATE_READY -> {
                         if (pulseTestManager != null) {
                             isScanning = true
+                            jtDevice = JTDevice(curDevice?.name!!, curDevice?.mac!!, curDevice?.deviceModel!!)
 //                            onToast("连接脉诊仪成功")
                             pulseListener?.onResult("连接脉诊仪成功", false)
+                            pulseListener?.onDevice(jtDevice!!)
                         }
                     }
                 }
@@ -242,7 +271,21 @@ class JTPulse(private var context: Activity) {
         fun onProgress(progress: Int)
         fun onResult(res: String, err: Boolean)
         fun onDown(data: ResultData)
+        fun onDevice(device: JTDevice)
     }
 
     data class ResultData(val data: ByteArray, val dataStr: String, val signature: String, val mac: String, val model: String, val rate: Int, val spo: Int) {}
+
+    data class JTDevice(val name: String, val mac: String, val model: String){}
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        private var instance: JTPulse? = null
+        fun getInstance(context: Activity): JTPulse {
+            if (instance == null) {
+                instance = JTPulse(context)
+            }
+            return instance!!
+        }
+    }
 }
